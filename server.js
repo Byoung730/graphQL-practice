@@ -1,6 +1,7 @@
 import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import bodyParser from 'body-parser'
+import schema from './schema.js'
 
 const server = express()
 
@@ -11,11 +12,7 @@ server.use(
   })
 )
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({}))
-
-// server.get('/', (req, res) => {
-//   res.send('<html><head><body><h1>Hey you</h1></body></head></html>')
-// })
+server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
 
 server.listen(4000, () => {
   console.log('listening on port 4000')
