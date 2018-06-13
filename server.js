@@ -1,14 +1,17 @@
 import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import bodyParser from 'body-parser'
 
 const server = express()
 
 server.use(
   '/graphiql',
   graphiqlExpress({
-    endpointURL: ''
+    endpointURL: '/graphql'
   })
 )
+
+server.use('/graphql', bodyParser.json(), graphqlExpress({}))
 
 // server.get('/', (req, res) => {
 //   res.send('<html><head><body><h1>Hey you</h1></body></head></html>')
